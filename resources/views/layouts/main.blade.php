@@ -22,4 +22,5 @@
     </div>
 </body>
 @vite('resources/js/app.js')
+@yield('postscript')
 </html>

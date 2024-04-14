@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent="submitForm">
         <div class="input-group mb-3">
-            <input type="text" v-model="name" class="form-control" placeholder="Full name">
+            <input type="text" style="text-transform: uppercase;" v-model="name" class="form-control" placeholder="Full name">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <span class="fas fa-user"></span>
@@ -51,6 +51,8 @@
 </template>
 
 <script>
+import { customJs } from '../custom';
+
 export default {
     props: ['root_url'],
     data() {
@@ -77,7 +79,12 @@ export default {
                     
                 if(response.status == 200){
                     if(response.data.status == 'success'){
-                        location.reload()
+                        customJs.runAlertSuccess('Your account has been registered. Please procced to login.')
+                        .then((result) => {
+                            if(result.value){
+                                window.location.replace(this.root_url+'/guest/login');
+                            }
+                        })
                     } else {
                         customJs.runError(response.data.message)
                     }

@@ -7,26 +7,35 @@
             <div class="modal-body">
                 <form id="taskData" class="row">
                     @csrf
-                    <div class="col-md-12">
+                    <div class="col-md-12 mb-3">
                         <label class="form-label">Task <span class="text-danger">*</span></label>
-                        <input type="password" name="password" class="form-control">
+                        <input name="task" style="text-transform: uppercase" class="form-control" value="{{ $task->task }}" required>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label class="form-label">Status <span class="text-danger">*</span></label>
+                        <select name="status" class="form-control">
+                            <option value="1" {{ $task->status == 1 ? 'selected' : NULL }}>New</option>
+                            <option value="2" {{ $task->status == 2 ? 'selected' : NULL }}>In Progress</option>
+                            <option value="3" {{ $task->status == 3 ? 'selected' : NULL }}>Done</option>
+                        </select>
                     </div>
                     <div class="col-md-12 mt-3">
-                        <label class="form-label">Description <span class="text-danger">*</span></label>
-                        <textarea name="description" class="form-control" rows="5"></textarea>
+                        <label class="form-label">Remark <span class="text-danger">*</span></label>
+                        <textarea name="remark" class="form-control" rows="5">{{ $task->remark }}</textarea>
                     </div>
+                    <input type="hidden" name="id" value="{{ $task->id }}">
                 </form>
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" onClick="submitPassword()" class="btn btn-primary">Submit</button>
+                <button type="button" onClick="submitTask()" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    submitPassword = () => {
+    submitTask = () => {
         var validateGroup = $(".needs-validation");
         var formData = new FormData($('#taskData')[0]);
 
@@ -34,7 +43,7 @@
             customJs.runLoader('save')
 
             $.ajax({
-                url: "{{ url('ajax/change-password') }}",
+                url: "{{ url('tasks/store-task') }}",
                 type: 'POST',
                 data: formData,
                 cache: false,

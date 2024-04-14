@@ -146,5 +146,7 @@ export const customJs = {
     runSuccess,
     runError,
     runAlertError,
-    closeLoader
+    closeLoader,
+    runAlertSuccess,
+    decodeEntities
 };

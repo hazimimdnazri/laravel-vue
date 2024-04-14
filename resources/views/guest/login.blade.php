@@ -17,9 +17,6 @@
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
                 <login-component :root_url="'{{ url('/') }}'"></login-component>
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
                 <p class="mb-0">
                     <a href="{{ url('guest/register') }}" class="text-center">Register a new membership</a>
                 </p>

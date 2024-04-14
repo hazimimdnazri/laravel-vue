@@ -46,7 +46,7 @@
             </nav>
         </div>
     </aside>
-    <div id="variable"></div>
+    <div id="variable_1"></div>
 </template>
 
 <script>
@@ -65,7 +65,7 @@
                         '_token': this._token,
                     }
                 }).done((response) => {
-                    $("#variable").html(response)
+                    $("#variable_1").html(response)
                     this.pwModal = new Modal(document.getElementById('modal-password'), { keyboard: false })
                     this.pwModal.show();
                     customJs.closeLoader()

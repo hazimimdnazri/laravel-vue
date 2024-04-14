@@ -31,12 +31,12 @@ Route::group(['middleware' => ['auth']], function(){
 
     Route::group(['prefix' => 'tasks'], function(){
         Route::get('/', [TaskController::class, 'tasks']);
+        Route::post('modal-task', [TaskController::class, 'modalTask']);
+        Route::post('store-task', [TaskController::class, 'storeTask']);
     });
 
     Route::group(['prefix' => 'ajax'], function(){
         Route::post('modal-password', [UserController::class, 'modalPassword']);
         Route::post('change-password', [UserController::class, 'changePassword']);
-        Route::post('modal-task', [TaskController::class, 'modalTask']);
-        Route::post('store-task', [TaskController::class, 'storeTask']);
     });
 });

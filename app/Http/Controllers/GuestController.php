@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use App\Models\User;
+use Hash;
 
 class GuestController extends Controller
 {
@@ -56,7 +58,32 @@ class GuestController extends Controller
     }
 
     public function submitRegister(Request $request){
-        return $request;
+        if(User::where('email', $request->email)->first()){
+            return [
+                'status' => 'error',
+                'message' => 'E-mail already exist.'
+            ];
+        }
+
+        if($request->password !== $request->password_confirm){
+            return [
+                'status' => 'error',
+                'message' => 'Confirmed password is not the same as the password.'
+            ];
+        }
+
+        $user = new User;
+        $user->name = strtoupper($request->name);
+        $user->email = strtolower($request->email);
+        $user->password = Hash::make($request->password_confirm);
+        $user->date_password = date('Y-m-d H:i:s');
+
+        if($user->save()){
+            return [
+                'status' => 'success',
+                'message' => 'User has been registered.'
+            ];
+        }
     }
 
     public function submitLogout(Request $request) : RedirectResponse {

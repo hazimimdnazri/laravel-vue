@@ -12,7 +12,7 @@
                         <div class="card-body">
                             <table id="taskList" class="table table-bordered">
                                 <thead>
-                                    <tr>
+                                    <tr >
                                         <th>Task</th>
                                         <th>Description</th>
                                         <th>Added By</th>
@@ -32,12 +32,40 @@
 </template>
 
 <script>
-import 'admin-lte/plugins/bootstrap/js/bootstrap';
 export default {
     name: 'task-component',
     props: ['root_url', '_token'],
     mounted(){
-        this.dt = new DataTable(document.getElementById('taskList'))
+        this.dt = new DataTable('#taskList', {
+            bLengthChange: false,
+            searchDelay: 500,
+            serverSide: true,
+            ajax : {
+                url: this.root_url+'/api/tasks',
+            },
+            columns: [
+                {class: 'align-middle', data: "task" },
+                {class: 'align-middle', data: "remark" },
+                {class: 'align-middle text-center', data: "added_by" },
+                {
+                    class: 'text-center align-middle px-2',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return customJs.decodeEntities(row.status)
+                    },
+                },
+                {
+                    class: 'text-center align-middle',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return `
+                            <button class='btn btn-info' onClick="modalTask(${row.id})"><i class="fa-solid fa-pen-to-square"></i></button>
+                            <button class='btn btn-danger' onClick="deleteTask(${row.id})"><i class="fa-solid fa-trash"></i></button>
+                        `
+                    },
+                }
+            ]
+        })
     },
     methods: {
         modalTask () {
@@ -45,7 +73,7 @@ export default {
             
             $.ajax({
                 type:"POST",
-                url: "ajax/modal-task",
+                url: "tasks/modal-task",
                 data: {
                     '_token': this._token,
                 }
@@ -55,7 +83,7 @@ export default {
                 this.pwModal.show();
                 customJs.closeLoader()
             });
-        }
+        },
     }
 }
 </script>
