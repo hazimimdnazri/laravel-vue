@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: docker-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:1.19-alpine
+    container_name: docker-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - app-network
+
+  db:
+    image: mariadb:11
+    container_name: docker-db
+    restart: unless-stopped
+    ports: 
+      - 3307:3306
+    volumes:
+      - ./docker/mariadb:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: laravue
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

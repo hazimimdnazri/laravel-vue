@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
-                <login-component></login-component>
+                <login-component :root_url="'{{ url('/') }}'"></login-component>
                 <p class="mb-1">
                     <a href="forgot-password.html">I forgot my password</a>
                 </p>

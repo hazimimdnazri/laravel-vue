@@ -35,6 +35,7 @@
 
 <script>
 export default {
+    props: ['root_url'],
     data() {
         return {
             email: '',
@@ -46,7 +47,7 @@ export default {
             customJs.runLoader('load')
             try {
                 const response = await Promise.race([
-                    axios.post('//127.0.0.1:8000/guest/login', {
+                    axios.post(root_url+'/guest/login', {
                         email: this.email,
                         password: this.password,
                     }),

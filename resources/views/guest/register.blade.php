@@ -16,7 +16,7 @@
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Register a new membership</p>
-                <register-component></register-component>
+                <register-component :root_url="'{{ url('/') }}'"></register-component>
                 <a href="{{ url('guest/login') }}" class="text-center">I already have a membership</a>
             </div>
 
