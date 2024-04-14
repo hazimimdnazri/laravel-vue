@@ -66,7 +66,7 @@ export default {
             customJs.runLoader('load')
             try {
                 const response = await Promise.race([
-                    axios.post(root_url+'/guest/register', {
+                    axios.post(this.root_url+'/guest/register', {
                         name: this.name,
                         email: this.email,
                         password: this.password,

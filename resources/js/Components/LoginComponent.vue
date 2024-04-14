@@ -47,7 +47,7 @@ export default {
             customJs.runLoader('load')
             try {
                 const response = await Promise.race([
-                    axios.post(root_url+'/guest/login', {
+                    axios.post(this.root_url+'/guest/login', {
                         email: this.email,
                         password: this.password,
                     }),
@@ -62,7 +62,7 @@ export default {
                     }
                 }
             } catch (error){
-                customJs.runError('Timeout!')
+                console.log(error)
             }
         }
     }
