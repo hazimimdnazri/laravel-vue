@@ -19,7 +19,7 @@
 
 <div id="variable"></div>
 
-<task-component :root_url="'{{ url('/') }}'" :_token="'{{ csrf_token() }}'" :tasks="''"></task-component>
+<task-component :root_url="'{{ url('/') }}'" :_token="'{{ csrf_token() }}'"></task-component>
 @endsection
 
 @section('postscript')

@@ -39,7 +39,6 @@ export default {
         this.dt = new DataTable('#taskList', {
             bLengthChange: false,
             searchDelay: 500,
-            serverSide: true,
             ajax : {
                 url: this.root_url+'/api/tasks',
             },
