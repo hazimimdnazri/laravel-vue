@@ -17,3 +17,4 @@
     ```
 
 - The application will be serving on your port 3000.
+- Login to the application using email `admin@mail.com` and password `123456`.
