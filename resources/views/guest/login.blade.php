@@ -12,7 +12,9 @@
     <div id="app" class="login-box">
         <div class="card card-outline card-primary">
             <div class="card-header text-center">
-                <a href="{{ url('/') }}" class="h1"><b>Laravel</b>Vue</a>
+                <a href="{{ url('/') }}" class="h1">
+                    <img src="{{ asset('assets/images/logo.png') }}" width="80%">
+                </a>
             </div>
             <div class="card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
